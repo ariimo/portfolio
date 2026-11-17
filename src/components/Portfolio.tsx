@@ -17,8 +17,7 @@ export default function Portfolio() {
   return (
     <section className={styles.portfolio} id="portfolio">
       <div className={styles.banner}>
-        <Image className={styles.bannerImage} src={portfolio.banner} alt="" fill sizes="100vw" />
-        <SectionHeader width={482} letterSpacing={13.0614}>
+        <SectionHeader width={482} letterSpacing={13.0614} light>
           {portfolio.title}
         </SectionHeader>
       </div>

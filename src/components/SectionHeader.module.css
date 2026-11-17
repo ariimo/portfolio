@@ -12,3 +12,8 @@
   line-height: 1.049;
   text-align: center;
 }
+
+.light {
+  border-color: var(--color-white);
+  color: var(--color-white);
+}

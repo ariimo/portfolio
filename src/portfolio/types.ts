@@ -54,6 +54,10 @@ export type ProjectBlock =
   | {type: "callout"; label?: string; text: string}
   // A row of big numbers.
   | {type: "stats"; items: {value: string; label: string}[]}
+  // A small comparison table: `columns` is the header row, `rows` the body.
+  | {type: "table"; columns: string[]; rows: string[][]; caption?: string}
+  // Code or a diff. In a diff, lines starting with + or - are tinted.
+  | {type: "code"; text: string; diff?: boolean; caption?: string}
   // Screenshots side by side. Phone screens (taller than wide) are kept narrow.
   | {
       type: "images";
