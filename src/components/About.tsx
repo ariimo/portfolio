@@ -11,15 +11,16 @@ function Entry({ entry }: { entry: AboutEntry }) {
         {entry.location && <span className={styles.location}>{entry.location}</span>}
       </h4>
       <p className={styles.period}>{entry.period}</p>
-      {/* Each "·"-separated part stays in one piece, so a long role wraps at the dot. */}
-      <p className={styles.role}>
-        {entry.role.split(' · ').map((part, index, parts) => (
-          <span key={part} className={styles.rolePart}>
-            {part}
-            {index < parts.length - 1 && ' · '}
-          </span>
-        ))}
-      </p>
+      {/* The role is the headline of an entry: one black tag per "·"-separated part. */}
+      {entry.role && (
+        <p className={styles.role}>
+          {entry.role.split(' · ').map((part) => (
+            <span key={part} className={styles.roleTag}>
+              {part}
+            </span>
+          ))}
+        </p>
+      )}
 
       {entry.notes?.map((note) => (
         <p key={note} className={styles.note}>
@@ -61,14 +62,20 @@ export default function About() {
       <Separator className={styles.separator} />
 
       <div className={styles.groups}>
-        {about.groups.map((group) => (
-          <div key={group.title}>
-            <h3 className={styles.groupTitle}>{group.title}</h3>
-            <ul className={styles.entries}>
-              {group.entries.map((entry) => (
-                <Entry key={entry.name} entry={entry} />
+        {[true, false].map((side) => (
+          <div key={String(side)} className={styles.column}>
+            {about.groups
+              .filter((group) => Boolean(group.side) === side)
+              .map((group) => (
+                <div key={group.title}>
+                  <h3 className={styles.groupTitle}>{group.title}</h3>
+                  <ul className={styles.entries}>
+                    {group.entries.map((entry) => (
+                      <Entry key={entry.name} entry={entry} />
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
           </div>
         ))}
       </div>

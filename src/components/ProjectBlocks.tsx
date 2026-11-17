@@ -220,6 +220,60 @@ function Mapping({ title, columns, passthrough, rows, caption }: MappingProps) {
   )
 }
 
+type TableProps = Extract<ProjectBlock, { type: 'table' }>
+
+function Table({ columns, rows, caption }: TableProps) {
+  return (
+    <figure className={styles.figure}>
+      <div className={styles.tableWrap}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              {columns.map((column) => (
+                <th key={column}>
+                  <Rich text={column} />
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, index) => (
+              <tr key={index}>
+                {row.map((cell, cellIndex) => (
+                  <td key={cellIndex}>
+                    <Rich text={cell} />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {caption && <figcaption className={styles.caption}>{caption}</figcaption>}
+    </figure>
+  )
+}
+
+type CodeProps = Extract<ProjectBlock, { type: 'code' }>
+
+function Code({ text, diff, caption }: CodeProps) {
+  return (
+    <figure className={styles.figure}>
+      <pre className={styles.codeBlock}>
+        {text.split('\n').map((line, index) => {
+          const tone = diff ? (line.startsWith('+') ? styles.added : line.startsWith('-') ? styles.removed : '') : ''
+          return (
+            <span key={index} className={`${styles.codeLine} ${tone}`}>
+              {line}
+            </span>
+          )
+        })}
+      </pre>
+      {caption && <figcaption className={styles.caption}>{caption}</figcaption>}
+    </figure>
+  )
+}
+
 type ImagesProps = Extract<ProjectBlock, { type: 'images' }>
 
 /** Screenshots in one row. Portrait ones (phone screens) are capped in width so they do not tower. */
@@ -289,6 +343,10 @@ export default function ProjectBlocks({ blocks }: { blocks: ProjectBlock[] }) {
                 ))}
               </ul>
             )
+          case 'table':
+            return <Table key={index} {...block} />
+          case 'code':
+            return <Code key={index} {...block} />
           case 'images':
             return <Images key={index} {...block} />
           case 'flow':

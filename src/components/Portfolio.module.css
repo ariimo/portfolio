@@ -2,23 +2,27 @@
   background: var(--color-dark);
 }
 
+/* A faint grid, the one the project thumbnails sit on, fading into the dark section below. */
 .banner {
+  --grid: 48px;
+  --grid-line: rgba(255, 255, 255, 0.06);
+
   position: relative;
   height: 321px;
   padding-top: 107px;
-}
-
-.bannerImage {
-  object-fit: cover;
-  object-position: center 12.2%;
-}
-
-/* Darkens the photo behind the section title. */
-.banner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.32);
+  background-color: #111;
+  background-image:
+    linear-gradient(to bottom, transparent 45%, var(--color-dark) 100%),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    var(--grid) var(--grid),
+    var(--grid) var(--grid);
+  background-position:
+    0 0,
+    center top,
+    center top;
 }
 
 .banner h2 {

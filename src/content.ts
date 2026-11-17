@@ -3,9 +3,6 @@
 // Replace the placeholder values with your own to personalise the site.
 
 import heroPhoto from "./assets/hero-photo.jpg";
-import mailIcon from "./assets/hero-social-1.svg";
-import githubIcon from "./assets/hero-social-2.svg";
-import linkedinIcon from "./assets/hero-social-3.svg";
 
 import java from "./assets/skills/java.svg";
 import kotlin from "./assets/skills/kotlin.svg";
@@ -52,28 +49,29 @@ export const navLinks = [
   {label: "Skills", href: "#skills"},
   {label: "Portfolio", href: "#portfolio"},
 ];
-// Opens a new email to me.
-export const navCta = {label: "CONTACT ME", href: links.email};
+// Small icons at the end of the menu.
+export const navSocials = [
+  {label: "Email", href: links.email, icon: footerEmail.src},
+  {label: "GitHub", href: links.github, icon: footerGithub.src},
+  {label: "LinkedIn", href: links.linkedin, icon: footerLinkedin.src},
+];
 
 export const profile = {
   greeting: "Hi, I am",
   name: "Arim Mo",
   role: "Software Engineer",
-  photo: heroPhoto,
-  socials: [
-    {label: "Email", href: links.email, icon: mailIcon.src},
-    {label: "GitHub", href: links.github, icon: githubIcon.src},
-    {label: "LinkedIn", href: links.linkedin, icon: linkedinIcon.src},
+  // The sentence shown big under the name: the first line is the main one.
+  intro: [
+    "안녕하세요! 사람을 위한 개발자를 꿈꾸는 모아림입니다.",
+    "정적이지만 다채로운 삶을 즐깁니다.",
   ],
+  photo: heroPhoto,
 };
 
 export const club = {
-  title: "짧은 소개",
-  paragraphs: [
-    "안녕하세요! 사람을 위한 개발자를 꿈꾸는 모아림입니다. 정적이지만 다채로운 삶을 즐깁니다.",
-    "공과대학 밴드부 보컬부터 독서 모임 회장, 미국 인턴생활까지. 다양한 환경과 사람들을 만나며, 신조로 삼게 된 요소들이 있습니다.",
-  ],
-  // Shown as a numbered list under the paragraphs.
+  title: "PRINCIPLES",
+  lead: "공과대학 밴드부 보컬부터 독서 모임 회장, 미국 인턴생활까지. 다양한 환경과 사람들을 만나며, 신조로 삼게 된 요소들이 있습니다.",
+  // Shown as numbered cards next to the lead.
   principles: [
     "미련을 남기지 말자. 결정했다면 끝까지, 후회 없이 마무리하자.",
     "어떤 환경이던 결과를 만드는 것은 나의 몫이니 모든 기회를 감사히 여기자.",
@@ -87,7 +85,8 @@ export type AboutEntry = {
   // Shown next to the name, e.g. the city.
   location?: string;
   period: string;
-  role: string;
+  // The headline tag(s) of the entry; leave out for something like a certificate.
+  role?: string;
   // Extra lines under the role, e.g. a GPA or a project name.
   notes?: string[];
   // Bulleted list of things worked on.
@@ -99,7 +98,8 @@ export const about: {
   title: string;
   lead: string;
   paragraphs: string[];
-  groups: {title: string; entries: AboutEntry[]}[];
+  // `side` groups are stacked in the narrow left column, the others in the wide right one.
+  groups: {title: string; side?: boolean; entries: AboutEntry[]}[];
 } = {
   title: "ABOUT ME",
   lead: "사람을 위한 기술을 만들고자 합니다.",
@@ -111,12 +111,27 @@ export const about: {
   groups: [
     {
       title: "EDUCATION",
+      side: true,
       entries: [
         {
           name: "Chonnam National University",
           period: "Mar. 2021 – Feb. 2027 (Expected)",
           role: "B.S. in Computer Engineering",
           notes: ["GPA: 4.29 / 4.5"],
+        },
+      ],
+    },
+    {
+      title: "CERTIFICATIONS",
+      side: true,
+      entries: [
+        {
+          name: "AWS Certified Solutions Architect – Associate",
+          period: "Jul. 2026",
+        },
+        {
+          name: "SQL Developer",
+          period: "Apr. 2024",
         },
       ],
     },
