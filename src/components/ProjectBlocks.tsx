@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import type { CSSProperties } from 'react'
-import type { FlowStage, MappingRow, ProjectBlock, ProjectListItem } from '../content'
+import type { FlowStage, MappingRow, ProjectBlock, ProjectListItem } from '../portfolio'
 import styles from './ProjectBlocks.module.css'
 
 /** Text with `code` and **bold** marks. */
@@ -46,22 +47,34 @@ function List({ items, ordered }: { items: ProjectListItem[]; ordered?: boolean 
   )
 }
 
-function Arrow({ direction }: { direction: 'right' | 'down' }) {
+const ARROW_PATHS = {
+  right: 'M2 13h20M15 6l7 7-7 7',
+  down: 'M13 2v20M6 15l7 7 7-7',
+  // Starts at the very top so that it touches the rail above it.
+  branch: 'M13 0v22M6 15l7 7 7-7',
+}
+
+function Arrow({ direction }: { direction: keyof typeof ARROW_PATHS }) {
   return (
-    <svg
-      className={direction === 'right' ? styles.arrowRight : styles.arrowDown}
-      width="26"
-      height="26"
-      viewBox="0 0 26 26"
-      aria-hidden="true"
-    >
-      <path
-        d={direction === 'right' ? 'M2 13h20M15 6l7 7-7 7' : 'M13 2v20M6 15l7 7 7-7'}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
+    <svg className={styles[`arrow-${direction}`]} width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+      <path d={ARROW_PATHS[direction]} fill="none" stroke="currentColor" strokeWidth="2" />
     </svg>
+  )
+}
+
+function FlowNode({ step }: { step: FlowStage['steps'][number] }) {
+  return (
+    <div className={styles.node}>
+      <p className={styles.nodeName}>{step.name}</p>
+      {step.detail && <p className={styles.nodeDetail}>{step.detail}</p>}
+      {step.items && (
+        <ul className={styles.nodeItems}>
+          {step.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
+    </div>
   )
 }
 
@@ -71,26 +84,42 @@ function Flow({ stages, caption }: { stages: FlowStage[]; caption?: string }) {
       <ol className={styles.flow}>
         {stages.map((stage, index) => (
           <li key={index} className={styles.stage}>
-            {index > 0 && <Arrow direction="down" />}
-            <div className={stage.label ? `${styles.group} ${stage.dark ? styles.dark : ''}` : styles.loose}>
-              {stage.label && (
-                <p className={styles.groupHead}>
-                  <span className={styles.groupLabel}>{stage.label}</span>
-                  {stage.note && <span className={styles.groupNote}>{stage.note}</span>}
+            {index > 0 &&
+              (stage.parallel ? (
+                <span className={styles.stem} />
+              ) : (
+                <p className={styles.link}>
+                  <Arrow direction="down" />
+                  {stage.via && <span className={styles.via}>{stage.via}</span>}
                 </p>
-              )}
-              <ol className={styles.steps}>
-                {stage.steps.map((step, stepIndex) => (
-                  <li key={step.name} className={styles.step}>
-                    {stepIndex > 0 && <Arrow direction="right" />}
-                    <div className={styles.node}>
-                      <p className={styles.nodeName}>{step.name}</p>
-                      {step.detail && <p className={styles.nodeDetail}>{step.detail}</p>}
-                    </div>
+              ))}
+            {stage.parallel ? (
+              <ul className={styles.branches}>
+                {stage.steps.map((step) => (
+                  <li key={step.name} className={styles.branch}>
+                    <Arrow direction="branch" />
+                    <FlowNode step={step} />
                   </li>
                 ))}
-              </ol>
-            </div>
+              </ul>
+            ) : (
+              <div className={stage.label ? `${styles.group} ${stage.dark ? styles.dark : ''}` : styles.loose}>
+                {stage.label && (
+                  <p className={styles.groupHead}>
+                    <span className={styles.groupLabel}>{stage.label}</span>
+                    {stage.note && <span className={styles.groupNote}>{stage.note}</span>}
+                  </p>
+                )}
+                <ol className={styles.steps}>
+                  {stage.steps.map((step, stepIndex) => (
+                    <li key={step.name} className={styles.step}>
+                      {stepIndex > 0 && <Arrow direction="right" />}
+                      <FlowNode step={step} />
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
           </li>
         ))}
       </ol>
@@ -191,6 +220,35 @@ function Mapping({ title, columns, passthrough, rows, caption }: MappingProps) {
   )
 }
 
+type ImagesProps = Extract<ProjectBlock, { type: 'images' }>
+
+/** Screenshots in one row. Portrait ones (phone screens) are capped in width so they do not tower. */
+function Images({ items, caption }: ImagesProps) {
+  const portrait = items.every((item) => item.src.height > item.src.width)
+
+  return (
+    <figure className={styles.figure}>
+      <ul
+        className={`${styles.images} ${portrait ? styles.imagesPortrait : ''}`}
+        style={{ '--count': items.length } as CSSProperties}
+      >
+        {items.map((item) => (
+          <li key={item.alt} className={styles.imageItem}>
+            <Image
+              className={styles.image}
+              src={item.src}
+              alt={item.alt}
+              sizes={portrait ? '260px' : '(min-width: 980px) 852px, 90vw'}
+            />
+            {item.caption && <p className={styles.imageCaption}>{item.caption}</p>}
+          </li>
+        ))}
+      </ul>
+      {caption && <figcaption className={styles.caption}>{caption}</figcaption>}
+    </figure>
+  )
+}
+
 /** The body of one section of the project detail view. */
 export default function ProjectBlocks({ blocks }: { blocks: ProjectBlock[] }) {
   return (
@@ -231,6 +289,8 @@ export default function ProjectBlocks({ blocks }: { blocks: ProjectBlock[] }) {
                 ))}
               </ul>
             )
+          case 'images':
+            return <Images key={index} {...block} />
           case 'flow':
             return <Flow key={index} stages={block.stages} caption={block.caption} />
           case 'bars':

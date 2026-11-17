@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { portfolio, type Project, type ProjectCategory } from '../content'
+import { portfolio, type Project, type ProjectCategory } from '../portfolio'
 import ProjectModal from './ProjectModal'
 import SectionHeader from './SectionHeader'
 import styles from './Portfolio.module.css'

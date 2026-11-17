@@ -184,6 +184,42 @@
   line-height: 1.6;
 }
 
+/* Screenshots: one row, equal columns. Phone screens stay at most 260px wide each. */
+.images {
+  --gap: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(var(--count), minmax(0, 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.imagesPortrait {
+  max-width: calc(var(--count) * 260px + (var(--count) - 1) * var(--gap));
+  margin-inline: auto;
+}
+
+.imageItem {
+  margin: 0;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--hairline);
+}
+
+.imageCaption {
+  margin-top: 10px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
 /* Flow diagram: stages stacked top to bottom, steps of a stage left to right. */
 .flow,
 .steps {
@@ -205,14 +241,87 @@
   width: 100%;
 }
 
-.arrowDown {
+.arrow-down {
   margin: 4px 0;
 }
 
-.arrowRight {
+.arrow-right {
   flex: none;
   align-self: center;
   margin: 0 2px;
+}
+
+.arrow-branch {
+  flex: none;
+  margin-bottom: 4px;
+}
+
+/* The arrow between two rows, with an optional note beside it. */
+.link {
+  position: relative;
+  display: flex;
+}
+
+.via {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-left: 8px;
+  color: #555;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  transform: translateY(-50%);
+}
+
+/* A row of branches: a stem down from the row above, a rail, and an arrow into each box. */
+.stem {
+  width: 2px;
+  height: 20px;
+  margin-top: 4px;
+  background: var(--color-black);
+}
+
+.branches {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.branch {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+/* The rail runs from the middle of the first branch to the middle of the last. */
+.branch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -8px;
+  left: -8px;
+  height: 2px;
+  background: var(--color-black);
+}
+
+.branch:first-child::before {
+  left: calc(50% - 1px);
+}
+
+.branch:last-child::before {
+  right: calc(50% - 1px);
+}
+
+.branch .node {
+  width: 100%;
 }
 
 .group {
@@ -297,6 +406,18 @@
   color: #555;
   font-size: 12.5px;
   line-height: 1.45;
+}
+
+.nodeItems {
+  display: grid;
+  gap: 2px;
+  margin: 8px 0 0;
+  padding: 8px 0 0;
+  border-top: 1px solid var(--hairline);
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 /* Bar chart. */
