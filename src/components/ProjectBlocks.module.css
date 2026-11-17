@@ -1,0 +1,511 @@
+.blocks {
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --hairline: rgba(0, 0, 0, 0.14);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: var(--color-ink);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.text strong,
+.list strong,
+.ordered strong {
+  font-weight: 700;
+}
+
+.code {
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.07);
+  font-family: var(--mono);
+  font-size: 0.86em;
+  /* A long name may break anywhere instead of pushing the line wide. */
+  overflow-wrap: anywhere;
+  /* Keep the padding on both halves when a name wraps. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Sub-heading inside a section. */
+.heading {
+  margin: 22px 0 0;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.heading:first-child {
+  margin-top: 0;
+}
+
+.list,
+.sublist,
+.ordered {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.7;
+}
+
+.list > li,
+.sublist > li {
+  position: relative;
+  padding-left: 18px;
+}
+
+/* Small square bullet. */
+.list > li::before {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--color-black);
+}
+
+.sublist {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+/* Hollow square for the second level. */
+.sublist > li::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border: 1.5px solid var(--color-black);
+}
+
+.ordered {
+  counter-reset: item;
+}
+
+.ordered > li {
+  position: relative;
+  padding-left: 34px;
+  counter-increment: item;
+}
+
+/* Number in a small black square. */
+.ordered > li::before {
+  content: counter(item);
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+}
+
+.callout {
+  margin: 8px 0;
+  padding: 22px 26px;
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.calloutLabel {
+  color: var(--color-chip);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+.calloutText {
+  margin-top: 8px;
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 8px 0;
+  border-block: 1px solid var(--hairline);
+}
+
+.stat {
+  padding: 20px 18px 18px;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--hairline);
+}
+
+.statValue {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+
+.statLabel {
+  margin-top: 8px;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.figure {
+  margin: 8px 0;
+}
+
+.figureTitle {
+  margin-bottom: 14px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.4px;
+}
+
+.caption {
+  margin-top: 12px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Flow diagram: stages stacked top to bottom, steps of a stage left to right. */
+.flow,
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.arrowDown {
+  margin: 4px 0;
+}
+
+.arrowRight {
+  flex: none;
+  align-self: center;
+  margin: 0 2px;
+}
+
+.group {
+  width: 100%;
+  padding: 14px 16px 16px;
+  border: 1.5px solid var(--color-black);
+  background: rgba(0, 0, 0, 0.045);
+}
+
+.dark {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+  line-height: 1.4;
+}
+
+.groupLabel {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.groupNote {
+  padding: 2px 10px;
+  border: 1.5px solid currentColor;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+}
+
+.step {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* A stage without a frame keeps its boxes at their natural width. */
+.loose .step {
+  flex: 0 1 auto;
+}
+
+.node {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 74px;
+  padding: 12px 12px;
+  border: 1.5px solid var(--color-black);
+  background: var(--color-white);
+  color: var(--color-black);
+  text-align: center;
+}
+
+.loose .node {
+  min-width: 250px;
+  min-height: 0;
+}
+
+.nodeName {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.nodeDetail {
+  margin-top: 4px;
+  color: #555;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+/* Bar chart. */
+.bars {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  align-items: center;
+  column-gap: 16px;
+  line-height: 1.3;
+}
+
+.barLabel {
+  font-size: 14px;
+  text-align: right;
+}
+
+.barTrack {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* The axis the bars grow from. */
+  border-left: 1px solid var(--color-black);
+}
+
+.bar {
+  /* Leaves room for the number after the longest bar. */
+  width: calc((100% - 44px) * var(--ratio));
+  min-width: 2px;
+  height: 16px;
+  border-radius: 0 3px 3px 0;
+  background: var(--color-black);
+}
+
+.barMuted {
+  background: #b5b5b5;
+}
+
+.barValue {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mapping example: payload value, transform, and the form field it fills. */
+.mapping {
+  border-block: 1.5px solid var(--color-black);
+}
+
+.mappingRow {
+  display: grid;
+  grid-template-columns: 300px 190px 1fr;
+  align-items: center;
+  column-gap: 14px;
+  padding: 18px 4px;
+}
+
+.mappingRow + .mappingRow {
+  border-top: 1px solid var(--hairline);
+}
+
+.mappingHead {
+  padding-block: 10px;
+  color: #555;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+.source,
+.sourceValue {
+  display: block;
+  font-family: var(--mono);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.source {
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.sourceValue {
+  margin-top: 2px;
+  color: #666;
+  font-size: 13px;
+}
+
+/* An arrow that runs through the column, with the transform name sitting on it. */
+.transform {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+}
+
+.transform::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  left: 0;
+  height: 1.5px;
+  background: var(--color-black);
+}
+
+.transform::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 3px;
+  width: 9px;
+  height: 9px;
+  border-top: 1.5px solid var(--color-black);
+  border-right: 1.5px solid var(--color-black);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.transformName,
+.passthrough {
+  position: relative;
+  z-index: 1;
+  padding: 3px 9px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.transformName {
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--mono);
+  font-weight: 600;
+}
+
+.passthrough {
+  background: var(--color-white);
+  color: #666;
+}
+
+.field {
+  padding-left: 12px;
+}
+
+.boxes,
+.line {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1;
+}
+
+.boxGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dash {
+  margin: 0 3px 0 7px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 26px;
+  border: 1px solid #6b6b6b;
+}
+
+.line {
+  gap: 8px;
+  padding: 0 4px 4px;
+  border-bottom: 1px solid #6b6b6b;
+}
+
+.prefix {
+  color: #555;
+}
+
+.lineText {
+  white-space: pre;
+}
+
+.fieldLabel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 5px;
+  color: #555;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.fieldNames {
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
