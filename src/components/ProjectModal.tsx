@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import { portfolio, type Project } from '../content'
+import ProjectBlocks from './ProjectBlocks'
 import styles from './ProjectModal.module.css'
 
 type Props = {
@@ -65,45 +66,55 @@ export default function ProjectModal({ project, onClose }: Props) {
             </h3>
             <p className={styles.description}>{project.description}</p>
 
-            {(project.period || project.stack || project.links) && (
-              <div className={styles.meta}>
-                {project.period && <p className={styles.period}>{project.period}</p>}
+            {(project.role || project.period || project.stack || project.links) && (
+              <dl className={styles.meta}>
+                {project.role && (
+                  <div className={styles.metaRow}>
+                    <dt>ROLE</dt>
+                    <dd>{project.role}</dd>
+                  </div>
+                )}
+                {project.period && (
+                  <div className={styles.metaRow}>
+                    <dt>PERIOD</dt>
+                    <dd>{project.period}</dd>
+                  </div>
+                )}
                 {project.stack && (
-                  <ul className={styles.stack}>
-                    {project.stack.map((name) => (
-                      <li key={name}>{name}</li>
-                    ))}
-                  </ul>
+                  <div className={styles.metaRow}>
+                    <dt>STACK</dt>
+                    <dd>
+                      <ul className={styles.stack}>
+                        {project.stack.map((name) => (
+                          <li key={name}>{name}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
                 )}
                 {project.links && (
-                  <ul className={styles.links}>
-                    {project.links.map((link) => (
-                      <li key={link.href}>
-                        <a href={link.href} target="_blank" rel="noreferrer">
-                          {link.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className={styles.metaRow}>
+                    <dt>LINKS</dt>
+                    <dd>
+                      <ul className={styles.links}>
+                        {project.links.map((link) => (
+                          <li key={link.href}>
+                            <a href={link.href} target="_blank" rel="noreferrer">
+                              {link.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
                 )}
-              </div>
+              </dl>
             )}
 
             {project.sections.map((section) => (
               <section key={section.title} className={styles.section}>
                 <h4 className={styles.sectionTitle}>{section.title}</h4>
-                {section.paragraphs?.map((paragraph) => (
-                  <p key={paragraph} className={styles.paragraph}>
-                    {paragraph}
-                  </p>
-                ))}
-                {section.items && (
-                  <ul className={styles.items}>
-                    {section.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                )}
+                <ProjectBlocks blocks={section.blocks} />
               </section>
             ))}
           </div>
