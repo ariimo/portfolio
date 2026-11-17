@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
-import { portfolio, type Project } from '../content'
+import { portfolio, type Project } from '../portfolio'
 import ProjectBlocks from './ProjectBlocks'
 import styles from './ProjectModal.module.css'
 
