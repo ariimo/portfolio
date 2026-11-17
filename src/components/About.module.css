@@ -1,0 +1,152 @@
+.about {
+  padding: 142px 0 60px;
+}
+
+.intro {
+  width: 860px;
+  margin: 71px auto 0;
+  color: var(--color-ink);
+  text-align: center;
+  /* Korean text: break lines between words, not inside them. */
+  word-break: keep-all;
+}
+
+.lead {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.paragraph {
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 1.75;
+  /* Even line lengths instead of a short last line. */
+  text-wrap: balance;
+}
+
+.lead + .paragraph {
+  margin-top: 30px;
+}
+
+.separator {
+  margin: 85px auto 0;
+}
+
+/* Education in a narrow column on the left, activities in a wider one on the right. */
+.groups {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 90px;
+  width: 1250px;
+  margin: 100px auto 0;
+}
+
+.groups + .separator {
+  margin-top: 120px;
+}
+
+.groupTitle {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 4.0784px;
+}
+
+/* As many 340px-or-wider columns as fit: one for education, two for activities. */
+.entries {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 52px 60px;
+  margin-top: 38px;
+}
+
+.entry {
+  padding: 2px 0 4px 22px;
+  border-left: 5px solid var(--color-black);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.location {
+  margin-left: 12px;
+  color: var(--color-filter-muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.period {
+  margin-top: 6px;
+  color: var(--color-filter-muted);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.role {
+  margin-top: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.rolePart {
+  display: inline-block;
+}
+
+.note {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.highlights {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 15px;
+}
+
+/* Small square bullet. */
+.highlights li::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  background: var(--color-black);
+}
+
+.website {
+  display: inline-block;
+  margin-top: 14px;
+  border-bottom: 1px solid currentColor;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.website::after {
+  content: ' ↗';
+}
+
+.website:hover,
+.website:focus-visible {
+  color: var(--color-filter-muted);
+}

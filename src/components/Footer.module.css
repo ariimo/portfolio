@@ -1,0 +1,63 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 326px;
+  padding-top: 69px;
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.backToTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 2.7807px;
+  transition: opacity 0.2s ease;
+}
+
+.backToTop:hover,
+.backToTop:focus-visible {
+  opacity: 0.7;
+}
+
+/* The source arrow points right; turn it to point up. */
+.arrow {
+  transform: rotate(-90deg);
+}
+
+.socials {
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  height: 30px;
+  margin-top: 44px;
+}
+
+.socials a {
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.socials a:hover,
+.socials a:focus-visible {
+  opacity: 0.7;
+}
+
+.copyright {
+  margin-top: 44px;
+  font-family: var(--font-footer);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  white-space: pre-wrap;
+}
+
+.copyright strong {
+  font-weight: 700;
+}

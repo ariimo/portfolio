@@ -1,0 +1,99 @@
+.hero {
+  /* Left edge shared by the logo and the intro text. */
+  --hero-left: max(40px, calc(50% - 689px));
+  /* Where the slanted edge between the grey panel and the photo meets the bottom of the hero. */
+  --edge-bottom: calc(50% - 185px);
+  /* How far that edge leans to the right from the bottom of the hero to the top. */
+  --edge-lean: 174px;
+
+  position: relative;
+  height: 1022px;
+  overflow: hidden;
+  background: var(--color-hero);
+}
+
+/* Right-hand panel filled by the photo, with a slanted left edge so the grey panel appears to lie over it. */
+.photoFrame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--edge-bottom);
+  background: var(--color-black);
+  clip-path: polygon(var(--edge-lean) 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/*
+ * Enlarged to fill the panel. The vertical focus point leaves dark sky behind
+ * the menu and keeps the skyline and the person in view at any window shape.
+ */
+.photo {
+  object-fit: cover;
+  object-position: center 75%;
+}
+
+/* Darkens the top of the photo so the white menu stays readable over bright areas. */
+.photoFrame::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 280px;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+}
+
+.logo {
+  position: absolute;
+  top: 72px;
+  left: calc(var(--hero-left) + 2px);
+}
+
+.intro {
+  position: absolute;
+  top: 362px;
+  left: var(--hero-left);
+  color: var(--color-black);
+  font-family: var(--font-display);
+  line-height: 1.174;
+}
+
+.greeting {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.name {
+  margin-top: 54px;
+  font-size: 80px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.role {
+  margin-top: 3px;
+  color: var(--color-muted);
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.socials {
+  display: flex;
+  gap: 31px;
+  margin-top: 137px;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 61px;
+  height: 56px;
+  background: var(--color-chip);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.social:hover,
+.social:focus-visible {
+  transform: translateY(-3px);
+}
+

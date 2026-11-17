@@ -1,0 +1,135 @@
+/*
+ * Viewport size as registered lengths. Registering them makes the browser
+ * resolve 100vw / 100vh to pixels, so they can be divided by the design sizes.
+ */
+@property --viewport-width {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 1920px;
+}
+
+@property --viewport-height {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 1237px;
+}
+
+:root {
+  /* Width of the Figma frame the layout is built for. */
+  --design-width: 1920px;
+  /* Height shown on first load: the hero (1022px) plus the top of the next band. */
+  --first-view-height: 1237px;
+
+  --viewport-width: 100vw;
+  --viewport-height: 100vh;
+
+  /*
+   * How much the whole page is scaled. tan(atan2(a, b)) is a / b as a plain
+   * number. The page grows or shrinks with the window until the design width
+   * fills it, or until the first view fills the window height, whichever comes
+   * first, so the hero always fits on screen.
+   */
+  --page-scale: min(
+    tan(atan2(var(--viewport-width), var(--design-width))),
+    tan(atan2(var(--viewport-height), var(--first-view-height)))
+  );
+
+  --color-black: #000;
+  --color-ink: #050505;
+  --color-white: #fff;
+  --color-offwhite: #fffbfb;
+  --color-hero: #d7d7d7;
+  --color-chip: #c4c4c4;
+  --color-muted: #909090;
+  --color-placeholder: #8b8b8b;
+  --color-filter-muted: #7c7c7c;
+  --color-line: #aaa;
+  --color-navbar: #0b0b0b;
+  --color-dark: #1a1a1a;
+  --color-band: #1d1d1d;
+
+  /* The --font-<family> variables are provided by next/font in app/layout.tsx. */
+  /* Latin letters use the first font; Korean falls through to --font-korean. */
+  --font-korean: var(--font-noto-sans-kr), sans-serif;
+  --font-display: var(--font-raleway), var(--font-korean);
+  --font-heading: var(--font-montserrat), var(--font-korean);
+  --font-body: var(--font-open-sans), var(--font-korean);
+  --font-footer: var(--font-nunito), var(--font-korean);
+  --font-mark: var(--font-varela), sans-serif;
+
+  --navbar-height: 66px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  zoom: var(--page-scale);
+  margin: 0;
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+section[id] {
+  scroll-margin-top: var(--navbar-height);
+}
+
+/* The page behind an open dialog does not scroll. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* White background that darkens slightly towards the edges. */
+.vignette {
+  background:
+    radial-gradient(50% 50% at 50% 50%, rgba(26, 21, 21, 0) 0%, rgba(1, 1, 1, 0.16) 100%),
+    var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

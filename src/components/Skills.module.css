@@ -1,0 +1,60 @@
+.skills {
+  padding: 60px 0 162px;
+}
+
+.groups {
+  width: 1250px;
+  margin: 84px auto 0;
+}
+
+/* Group title on the left, its skills on the right. Columns match the About section. */
+.group {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  column-gap: 90px;
+  padding: 38px 0 34px;
+}
+
+.group + .group {
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.groupTitle {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 700;
+  /* Same height as the icons, so the title lines up with their middle. */
+  line-height: 52px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 28px;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.label {
+  margin-top: 14px;
+  padding: 0 6px;
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.4px;
+  text-align: center;
+}

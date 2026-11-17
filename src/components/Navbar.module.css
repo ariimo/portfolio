@@ -1,0 +1,77 @@
+/* Sits over the hero at first, then becomes a solid bar pinned to the top. */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--navbar-height);
+  background: transparent;
+  pointer-events: none;
+  transform: translateY(55px);
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.scrolled {
+  background: var(--color-navbar);
+  pointer-events: auto;
+  transform: none;
+}
+
+.nav {
+  position: absolute;
+  top: 10px;
+  right: max(24px, calc(50% - 668px));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+  transition: right 0.3s ease;
+}
+
+.scrolled .nav {
+  right: 65px;
+}
+
+.link,
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 147px;
+  height: 46px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: normal;
+}
+
+.link {
+  color: var(--color-white);
+  font-size: 17px;
+  transition: opacity 0.2s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  opacity: 0.7;
+}
+
+.cta {
+  margin-left: 25px;
+  border: 4px solid var(--color-white);
+  border-radius: 30px;
+  background: var(--color-white);
+  color: var(--color-black);
+  font-size: 15px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  background: transparent;
+  color: var(--color-white);
+}

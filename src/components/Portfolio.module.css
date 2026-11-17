@@ -1,0 +1,170 @@
+.portfolio {
+  background: var(--color-dark);
+}
+
+.banner {
+  position: relative;
+  height: 321px;
+  padding-top: 107px;
+}
+
+.bannerImage {
+  object-fit: cover;
+  object-position: center 12.2%;
+}
+
+/* Darkens the photo behind the section title. */
+.banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.banner h2 {
+  position: relative;
+  z-index: 1;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 201px 185px 201px;
+  width: 587px;
+  margin: 32px auto 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.filter {
+  position: relative;
+  height: 47px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-filter-muted);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.filter:hover,
+.filter:focus-visible,
+.active {
+  color: var(--color-offwhite);
+}
+
+/* White underline drawn over the grey rule of the filter bar. */
+.active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: var(--color-white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 32px;
+}
+
+.project {
+  position: relative;
+  aspect-ratio: 640 / 401;
+  overflow: hidden;
+}
+
+/* The whole thumbnail is a button that opens the detail view. */
+.card {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.thumbnail {
+  object-fit: cover;
+}
+
+.mirrored {
+  transform: scaleX(-1);
+}
+
+/* Project info, revealed on hover or keyboard focus. */
+.details {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  line-height: normal;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.card:hover .details,
+.card:focus-visible .details {
+  opacity: 1;
+}
+
+.tags {
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.95px;
+}
+
+.title {
+  margin-top: 19px;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.279;
+  letter-spacing: 5.1345px;
+}
+
+.description {
+  margin-top: 15px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: -0.15px;
+}
+
+/* Hint that the card can be clicked, framed by a vertical line on each side. */
+.more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 27px;
+  margin-top: 26px;
+  border-inline: 2px solid currentColor;
+  color: var(--color-offwhite);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.14px;
+}
+
+.footnote {
+  height: 70px;
+  color: var(--color-offwhite);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 70px;
+  text-align: center;
+}

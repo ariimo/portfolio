@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 107px;
+  margin: 0 auto;
+  border: 8px solid var(--color-black);
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.049;
+  text-align: center;
+}

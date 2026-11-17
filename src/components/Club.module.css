@@ -1,0 +1,116 @@
+.club {
+  position: relative;
+  min-height: 308px;
+  padding: 49px 0 50px 102px;
+  overflow: hidden;
+  background: var(--color-band);
+  color: var(--color-white);
+}
+
+.title {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 5.5614px;
+}
+
+.text {
+  position: relative;
+  width: min(1148px, calc(100% - 670px));
+  margin-top: 25px;
+  font-size: 15px;
+  line-height: 1.6;
+  /* Korean text: break lines between words, not inside them. */
+  word-break: keep-all;
+}
+
+.principles {
+  display: grid;
+  gap: 4px;
+  margin: 18px 0 0;
+  padding-left: 22px;
+  list-style: decimal;
+}
+
+.principles li {
+  padding-left: 4px;
+}
+
+/* Club logo watermark, anchored to the right edge of the band. */
+.mark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 570px;
+  height: 100%;
+}
+
+.mark > div {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mark img {
+  flex: none;
+  max-width: none;
+}
+
+.ellipse1 {
+  top: -119.89px;
+  left: 292.52px;
+  width: 240px;
+  height: 244.73px;
+}
+
+.ellipse1 img {
+  transform: rotate(49.16deg) skewX(2.53deg);
+}
+
+.ellipse2 {
+  top: -98.4px;
+  left: 222.12px;
+  width: 135.49px;
+  height: 175.34px;
+}
+
+.ellipse2 img {
+  transform: rotate(-4.42deg) skewX(-2.75deg);
+}
+
+.rect {
+  top: -25.63px;
+  left: 0;
+  width: 503.9px;
+  height: 493.77px;
+}
+
+.rect img {
+  transform: rotate(23.89deg);
+}
+
+.letters {
+  top: 43.84px;
+  left: 95.9px;
+  width: 347.19px;
+  height: 357.86px;
+}
+
+.letters span {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 256.74px;
+  height: 277.68px;
+  color: var(--color-black);
+  font-family: var(--font-mark);
+  font-size: 280px;
+  line-height: normal;
+  letter-spacing: 3.7867px;
+  white-space: nowrap;
+  transform: rotate(23.89deg);
+}
