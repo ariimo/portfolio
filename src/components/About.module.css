@@ -43,6 +43,13 @@
   margin: 100px auto 0;
 }
 
+/* Groups of one column are stacked with room between them. */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 76px;
+}
+
 .groups + .separator {
   margin-top: 120px;
 }
@@ -92,18 +99,25 @@
 }
 
 .role {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-top: 16px;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.45;
 }
 
-.rolePart {
-  display: inline-block;
+.roleTag {
+  padding: 5px 12px 6px;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.3px;
 }
 
 .note {
-  margin-top: 8px;
+  margin-top: 12px;
   font-size: 14px;
   line-height: 1.5;
 }

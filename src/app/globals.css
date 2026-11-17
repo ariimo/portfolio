@@ -55,7 +55,6 @@
   --font-heading: var(--font-montserrat), var(--font-korean);
   --font-body: var(--font-open-sans), var(--font-korean);
   --font-footer: var(--font-nunito), var(--font-korean);
-  --font-mark: var(--font-varela), sans-serif;
 
   --navbar-height: 66px;
 }

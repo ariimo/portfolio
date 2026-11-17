@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Montserrat, Noto_Sans_KR, Nunito, Open_Sans, Raleway, Varela } from 'next/font/google'
+import { Montserrat, Noto_Sans_KR, Nunito, Open_Sans, Raleway } from 'next/font/google'
 import type { ReactNode } from 'react'
 import './globals.css'
 
@@ -11,11 +11,10 @@ const montserrat = Montserrat({
 const raleway = Raleway({ subsets: ['latin'], variable: '--font-raleway' })
 const openSans = Open_Sans({ subsets: ['latin'], variable: '--font-open-sans' })
 const nunito = Nunito({ subsets: ['latin'], variable: '--font-nunito' })
-const varela = Varela({ subsets: ['latin'], weight: '400', variable: '--font-varela' })
 // Korean text. Not preloaded: the browser fetches only the slices holding the characters on the page.
 const notoSansKr = Noto_Sans_KR({ preload: false, variable: '--font-noto-sans-kr' })
 
-const fontVariables = [montserrat, raleway, openSans, nunito, varela, notoSansKr]
+const fontVariables = [montserrat, raleway, openSans, nunito, notoSansKr]
   .map((font) => font.variable)
   .join(' ')
 

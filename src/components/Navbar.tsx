@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { navCta, navLinks } from '../content'
+import { navLinks, navSocials } from '../content'
 import styles from './Navbar.module.css'
 
 // Scroll distance (px) after which the navbar switches to its solid bar.
@@ -25,9 +25,15 @@ export default function Navbar() {
             {link.label}
           </a>
         ))}
-        <a className={styles.cta} href={navCta.href}>
-          {navCta.label}
-        </a>
+        <ul className={styles.socials}>
+          {navSocials.map((social) => (
+            <li key={social.label}>
+              <a className={styles.social} href={social.href} aria-label={social.label}>
+                <img src={social.icon} alt="" />
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
     </header>
   )
