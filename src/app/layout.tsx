@@ -19,7 +19,7 @@ const fontVariables = [montserrat, raleway, openSans, nunito, notoSansKr]
   .join(' ')
 
 export const metadata: Metadata = {
-  title: 'Portfolio',
+  title: 'ariimo Portfolio',
   description: 'Personal portfolio',
 }
 
